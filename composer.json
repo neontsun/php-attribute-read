@@ -19,7 +19,8 @@
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.8.2",
-        "ergebnis/composer-normalize": "^2.45"
+        "ergebnis/composer-normalize": "^2.45",
+        "phpunit/phpunit": "^9.6"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -51,6 +52,7 @@
     "scripts": {
         "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --show-progress=bar --diff -vvv",
         "phpstan": "tools/phpstan/vendor/bin/phpstan analyse --autoload-file vendor/autoload.php --configuration phpstan.dist.neon",
-        "rector": "tools/rector/vendor/bin/rector process --config=rector.php --ansi"
+        "rector": "tools/rector/vendor/bin/rector process --config=rector.php --ansi",
+        "tests": "vendor/bin/phpunit --configuration phpunit.xml"
     }
 }
