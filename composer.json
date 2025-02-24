@@ -1,0 +1,56 @@
+{
+    "name": "neontsun/read-attribute",
+    "description": "Utils for reading attributes",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "php",
+        "attributes",
+        "reading"
+    ],
+    "authors": [
+        {
+            "name": "Anton Kruglov",
+            "email": "usualtsun@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8.2",
+        "ergebnis/composer-normalize": "^2.45"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Neontsun\\ReadAttribute\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Neontsun\\ReadAttribute\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true,
+            "ergebnis/composer-normalize": true
+        },
+        "bump-after-update": true,
+        "sort-packages": true
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "forward-command": true,
+            "target-directory": "tools"
+        }
+    },
+    "scripts": {
+        "phpstan": "tools/phpstan/vendor/bin/phpstan analyse --autoload-file vendor/autoload.php --configuration phpstan.dist.neon",
+        "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --show-progress=bar --diff -vvv",
+        "rector": "tools/rector/vendor/bin/rector process --config=rector.php --ansi"
+    }
+}
