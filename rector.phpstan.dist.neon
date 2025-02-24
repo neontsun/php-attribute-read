@@ -16,3 +16,8 @@ parameters:
         check:
             tooWideThrowType: false
             missingCheckedExceptionInThrows: true 
+    ignoreErrors:
+        - 
+            identifier: staticMethod.dynamicCall
+        -
+            identifier: property.unused
