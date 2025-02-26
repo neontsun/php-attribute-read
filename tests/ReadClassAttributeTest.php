@@ -10,6 +10,7 @@ use Neontsun\ReadAttribute\Exception\UnexpectedTypeException;
 use Neontsun\ReadAttribute\ReadAttribute;
 use Neontsun\ReadAttribute\Tests\Fixture\Attribute\FirstTestAttribute;
 use Neontsun\ReadAttribute\Tests\Fixture\Attribute\SecondTestAttribute;
+use Neontsun\ReadAttribute\Tests\Fixture\Attribute\ThirdTestAttribute;
 use Neontsun\ReadAttribute\Tests\Fixture\ClassWithMultiplyAttribute;
 use Neontsun\ReadAttribute\Tests\Fixture\ClassWithOneSingleAndTwoMultiplyAttribute;
 use Neontsun\ReadAttribute\Tests\Fixture\ClassWithoutAttribute;
@@ -23,7 +24,28 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
 final class ReadClassAttributeTest extends TestCase
 {
     use ReadAttribute;
-
+	
+	/**
+	 * @return void
+	 * @throws ExpectationFailedException
+	 * @throws InvalidArgumentException
+	 * @throws ReflectionException
+	 */
+	public function testHasClassAttribute(): void
+	{
+		$hasFirstAttribute = $this->hasClassAttribute(ClassWithSingleAttribute::class, FirstTestAttribute::class);
+		$noAttribute = $this->hasClassAttribute(ClassWithoutAttribute::class, FirstTestAttribute::class);
+		$hasFirstAttributeFromMultiplyAttributesClass = $this->hasClassAttribute(ClassWithOneSingleAndTwoMultiplyAttribute::class, FirstTestAttribute::class);
+		$hasSecondAttributeFromMultiplyAttributesClass = $this->hasClassAttribute(ClassWithOneSingleAndTwoMultiplyAttribute::class, SecondTestAttribute::class);
+		$noAttributeFromMultiplyAttributesClass = $this->hasClassAttribute(ClassWithOneSingleAndTwoMultiplyAttribute::class, ThirdTestAttribute::class);
+		
+		$this->assertTrue($hasFirstAttribute);
+		$this->assertFalse($noAttribute);
+		$this->assertTrue($hasFirstAttributeFromMultiplyAttributesClass);
+		$this->assertTrue($hasSecondAttributeFromMultiplyAttributesClass);
+		$this->assertFalse($noAttributeFromMultiplyAttributesClass);
+	}
+	
     /**
      * @throws NotContainException
      * @throws NotSupportException
