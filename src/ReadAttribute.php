@@ -17,6 +17,19 @@ use function sprintf;
 
 trait ReadAttribute
 {
+	/**
+	 * @template T of object
+	 * @param class-string|object $value
+	 * @param class-string<T> $attribute
+	 * @throws ReflectionException
+	 */
+	public function hasClassAttribute(object|string $value, string $attribute): bool
+	{
+		$attributes = (new ReflectionClass($value))->getAttributes($attribute, ReflectionAttribute::IS_INSTANCEOF);
+		
+		return [] !== $attributes;
+	}
+	
     /**
      * @template T of object
      * @param class-string|object $value
